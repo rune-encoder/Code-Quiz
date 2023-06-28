@@ -11,10 +11,7 @@ body,
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background-image: url(./assets/background.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: black;
+
 }
 
 .wrapper {
@@ -33,18 +30,53 @@ header {
   justify-content: space-between;
 }
 
-.card {
-  display: block;
-  background-image: url(./assets/card.png);
+.mainbackground {
+  background-image: url(./assets/background.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(0, 0, 0);
+}
+
+.secondarybackground {
+  background-image: url(./assets/background2.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+}
+
+.maincard {
+  background-image: url(./assets/card.png), linear-gradient(175deg, rgba(67, 108, 131, 0.788) 0%, rgba(0, 0, 255, 0.185) 100%);
+  background-blend-mode: color-dodge;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 98%;
+}
+
+.secondarycard{
+  background-image: url(./assets/card2.png), linear-gradient(175deg, rgba(67, 108, 131, 0.788) 0%, rgba(0, 0, 255, 0.185) 100%);
+  background-blend-mode: overlay;
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 98%;
+}
+
+.card {
+  display: block;
   color: #cacaca;
   font-size: 18px;
   font-variant: small-caps;
   margin: 0 auto;
   max-width: 800px;
   padding: 45px 45px;
+}
+
+.score-footer {
+  padding: 40px 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 footer {
@@ -65,6 +97,14 @@ ul {
 #start,
 #end {
   text-align: center;
+}
+
+#go-back,
+#clear-scores {
+  margin: 16px 16px 16px 20px;
+  padding: 10px 10px;
+  text-align: center;
+  width: 300px;
 }
 
 #start-button,
@@ -106,6 +146,43 @@ button:hover {
   color: #28aaf5;
 }
 
+a {
+  text-decoration: none;
+}
+
 .hide {
   display: none;
 }
+
+#initials {
+  width: 80%;
+  border-radius: 10px;
+  border: 1px solid black;
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 35px;
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  color: whitesmoke;
+  background: radial-gradient(circle, rgb(53, 57, 75) 0%, rgba(58, 52, 3, 0.509) 0%, rgba(0,0,0,1) 100%);
+}
+
+#score-list {
+  display: block;
+  width: 100%;
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: 40px;
+  font-size: 1.5rem;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  border: 1px solid #050505;
+  overflow: hidden;
+  color: whitesmoke;
+  resize: none;
+  background: radial-gradient(circle, rgb(53, 57, 75) 0%, rgba(58, 52, 3, 0.509) 0%, rgba(0,0,0,1) 100%);
+}
+

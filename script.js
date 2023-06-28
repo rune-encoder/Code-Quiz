@@ -57,18 +57,23 @@ var endEl = document.getElementById("end");
 var endScoreEl = document.getElementById("score");
 var endInputEl = document.getElementById("initials");
 var endSubmitButton = document.getElementById("submit-button");
+var scoreListEl = document.querySelector("#score-list");
+var clearScore = document.getElementById("clear-scores");
+var goBack = document.getElementById("go-back");
 //**********************************************************************
 var timerElement = document.querySelector("#timer-count");
 var timerCount;
 var timer;
+var correctQuestions = 0;
+var finalScore;
 
-//****************************************************************************************************
+var savePlay;
+var storedPlays = localStorage.getItem("savePlay");
 
-// when all questions are answered or timer reaches 0
-// game over
-// then i can save initials and score
-// local storage
-//******************
+if (storedPlays !== null) {
+  savePlay = storedPlays;
+}
+
 
 function startQuiz() {
   startEl.setAttribute("class", "hide");
@@ -78,8 +83,43 @@ function startQuiz() {
 }
 
 function finishedQuiz() {
+  calculateScore();
   questionEl.setAttribute("class", "hide");
+  messageEl.setAttribute("class", "hide");
   endEl.removeAttribute("class");
+  endSubmitButton.addEventListener("click", saveScoreLocalStorage);
+}
+
+function renderScores() {
+  userInitals = localStorage.getItem("initials");
+  finalScore = localStorage.getItem("score");
+  var scoreList = document.createElement("li");
+  savePlay = userInitals + " - " + finalScore;
+  scoreList.textContent = savePlay;
+
+  scoreListEl.appendChild(scoreList);
+
+  localStorage.setItem("savePlay", savePlay);
+
+
+  goBack.addEventListener("click", function() {
+    location.replace("./index.html")
+  });
+}
+
+function saveScoreLocalStorage() {
+  var userInitals = endInputEl.value.trim();
+  localStorage.setItem("initials", userInitals);
+  localStorage.setItem("score", finalScore);
+  location.replace("./highscores.html");
+  renderScores()
+}
+
+function calculateScore() {
+  var gradePercentage = (correctQuestions / questions.length) * 100;
+  finalScore = gradePercentage + "%";
+  endScoreEl.textContent = finalScore;
+  return finalScore;
 }
 
 function startTimer() {
@@ -140,7 +180,8 @@ function renderQuestion() {
   }
 
   if (timerCount <= 0) {
-    console.log(timerCount);
+    qAnswerEl.removeChild(qAnswerDivEl);
+    messageEl.removeChild(messagePEl);
     return finishedQuiz();
   }
 
@@ -149,6 +190,7 @@ function renderQuestion() {
 
     if (element.textContent === q.correct) {
       messagePEl.textContent = message[1];
+      correctQuestions++;
     } else {
       messagePEl.textContent = message[0];
       timerCount = timerCount - 10;
@@ -179,4 +221,12 @@ function renderQuestion() {
   });
 }
 
-startButton.addEventListener("click", startQuiz);
+function init() {
+  if (startButton === null) {
+    renderScores();
+  } else {
+    startButton.addEventListener("click", startQuiz);
+  }
+}
+
+init();

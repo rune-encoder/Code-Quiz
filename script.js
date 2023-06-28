@@ -32,6 +32,36 @@ let questions = [
     choices: ["JavaScript", "terminal/bash", "for loops", "console log"],
     correct: "console log",
   },
+  {
+    question:
+      "Which of the following is NOT used to set an attribute in JavaScript:",
+    choices: [".setAttribute()", "document.querySelector()", "document.documentElement", "document.createElement()"],
+    correct: "document.documentElement",
+  },
+  {
+    question:
+      "Which of the following is NOT a used as a method to declare a variable: ",
+    choices: ["var", "const", "for", "let"],
+    correct: "for",
+  },
+  {
+    question:
+      "Which of the following is NOT a Primitive Data Type ",
+    choices: ["number", "boolean", "bigint", "object"],
+    correct: "object",
+  },
+  {
+    question:
+      "Which naming convention is typically used when naming a variable: ",
+    choices: ["camelCase", "SNAKE_CASE", "PascalCase", "dot.notation"],
+    correct: "camelCase",
+  },
+  {
+    question:
+      "Which of the following is NOT a Logical Operator: ",
+    choices: ["&&", "===", "||", "!"],
+    correct: "===",
+  },
 ];
 
 // Starting point for our master questions array where we will extract our questions and answers.

@@ -169,7 +169,7 @@ a {
   background: radial-gradient(circle, rgb(53, 57, 75) 0%, rgba(58, 52, 3, 0.509) 0%, rgba(0,0,0,1) 100%);
 }
 
-#score-list {
+#score-ul {
   display: block;
   width: 100%;
   padding-top: 10px;

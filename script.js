@@ -55,15 +55,14 @@ var messageEl = document.getElementById("message");
 
 // Targets our elements that will display at the end of the quiz.
 var endEl = document.getElementById("end");
-
-//**********************************************************************
 var endScoreEl = document.getElementById("score");
 var endInputEl = document.getElementById("initials");
 var endSubmitButton = document.getElementById("submit-button");
-var scoreListEl = document.querySelector("#score-list");
+
+// Targets our elements that will display on the next page.
+var scoreDivEl = document.getElementById("score-ul");
 var clearScore = document.getElementById("clear-scores");
 var goBack = document.getElementById("go-back");
-//**********************************************************************
 
 // Targets our element that will display our timer.
 var timerElement = document.querySelector("#timer-count");
@@ -75,38 +74,58 @@ var timer;
 // Sets value of user's final score in a later function.
 var finalScore;
 
-//**********************************************************************
+// Create empty array that will hold our save progress in local storage.
+var plays = [];
+
+// Variable will save our final score and initials.
 var savePlay;
-var storedPlays = localStorage.getItem("savePlay");
 
-if (storedPlays !== null) {
-  savePlay = storedPlays;
-}
-//**********************************************************************
-function renderScores() {
-  userInitals = localStorage.getItem("initials");
-  finalScore = localStorage.getItem("score");
-  var scoreList = document.createElement("li");
+// This function saves user's initials and final percentage score.
+function saveUserInput() {
+  var userInitals = endInputEl.value.trim();
   savePlay = userInitals + " - " + finalScore;
-  scoreList.textContent = savePlay;
+  saveLocal();
+  return savePlay;
+}
 
-  scoreListEl.appendChild(scoreList);
+// This function pushes our score to the plays array and saves it in local storage before loading next page.
+function saveLocal() {
+  plays.push(savePlay);
+  localStorage.setItem("plays", JSON.stringify(plays));
+  location.replace("./highscores.html");
+  createScoreList();
+}
 
-  localStorage.setItem("savePlay", savePlay);
+// This function renders the Highscore list to check your progress.
+function createScoreList() {
+  // Creates and appends an unordered list to our score container.
+  var scoreUlEl = document.createElement("ul");
+  scoreDivEl.appendChild(scoreUlEl);
 
+  // With this we retrieve our saved data from local storage.
+  var storedPlays = JSON.parse(localStorage.getItem("plays"));
+
+  // This will create a list depending on the amount of scores we have saved.
+  for (var i = 0; i < storedPlays.length; i++) {
+    var createList = storedPlays[i];
+    var scoreLi = document.createElement("li");
+    scoreLi.textContent = createList;
+    scoreLi.setAttribute("data-index", i);
+    scoreUlEl.appendChild(scoreLi);
+  }
+
+  // When we click on go back we will return to the main page.
   goBack.addEventListener("click", function () {
     location.replace("./index.html");
   });
-}
 
-function saveScoreLocalStorage() {
-  var userInitals = endInputEl.value.trim();
-  localStorage.setItem("initials", userInitals);
-  localStorage.setItem("score", finalScore);
-  location.replace("./highscores.html");
-  renderScores();
+  // When we click on clear score our list items are deleted and local storage is cleared.
+  clearScore.addEventListener("click", function () {
+    scoreDivEl.removeChild(scoreUlEl);
+    localStorage.clear();
+  });
+  return;
 }
-//**********************************************************************
 
 // This function starts our quiz by hiding our starting elements. Initializes our timer and questions.
 function startQuiz() {
@@ -122,7 +141,7 @@ function finishedQuiz() {
   questionEl.setAttribute("class", "hide");
   messageEl.setAttribute("class", "hide");
   endEl.removeAttribute("class");
-  endSubmitButton.addEventListener("click", saveScoreLocalStorage);
+  endSubmitButton.addEventListener("click", saveUserInput);
 }
 
 // This function calculates our quiz score.
@@ -253,10 +272,16 @@ function renderQuestion() {
   });
 }
 
-//**********************************************************************
 function init() {
+  var storedPlays = JSON.parse(localStorage.getItem("plays"));
+
+  if (storedPlays !== null) {
+    plays = storedPlays;
+    console.log(plays);
+  }
+
   if (startButton === null) {
-    renderScores();
+    createScoreList();
   } else {
     startButton.addEventListener("click", startQuiz);
   }

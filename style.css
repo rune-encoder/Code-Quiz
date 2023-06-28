@@ -11,7 +11,6 @@ body,
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-
 }
 
 .wrapper {
@@ -20,14 +19,21 @@ body {
   padding-right: 20px;
 }
 
+h2 {
+  padding-bottom: 25px;
+  border-bottom: 2px solid #da7d7d;
+}
+
 header {
+  margin-bottom: 30px;
+  border-bottom: 0.1px solid rgb(12, 81, 102);
   display: flex;
   text-align: center;
   font-variant: small-caps;
-  padding: 25px;
-  padding-top: 0px;
+  padding: 20px 80px;
   color: #fff;
   justify-content: space-between;
+  background-color: #1b2231a4;
 }
 
 .mainbackground {
@@ -45,16 +51,26 @@ header {
 }
 
 .maincard {
-  background-image: url(./assets/card.png), linear-gradient(175deg, rgba(67, 108, 131, 0.788) 0%, rgba(0, 0, 255, 0.185) 100%);
+  background-image: url(./assets/card.png),
+    linear-gradient(
+      175deg,
+      rgba(67, 108, 131, 0.788) 0%,
+      rgba(0, 0, 255, 0.185) 100%
+    );
   background-blend-mode: color-dodge;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 98%;
 }
 
-.secondarycard{
-  background-image: url(./assets/card2.png), linear-gradient(175deg, rgba(67, 108, 131, 0.788) 0%, rgba(0, 0, 255, 0.185) 100%);
-  background-blend-mode: overlay;
+.secondarycard {
+  background-image: url(./assets/card2.png),
+    linear-gradient(
+      175deg,
+      rgba(67, 108, 131, 0.788) 0%,
+      rgba(0, 0, 255, 0.185) 100%
+    );
+  background-blend-mode: color-dodge;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 98%;
@@ -62,12 +78,14 @@ header {
 
 .card {
   display: block;
-  color: #cacaca;
+  color: #da7d7d;
+  text-shadow: 0px 0px 8px rgb(5, 5, 5);
   font-size: 18px;
   font-variant: small-caps;
   margin: 0 auto;
   max-width: 800px;
   padding: 45px 45px;
+  box-shadow: 0px 10px 30px 1px #4982c4;
 }
 
 .button-container {
@@ -137,17 +155,13 @@ button {
 
 button:hover {
   background-color: #000000;
-  box-shadow: 0px 0px 20px 0px #fdfdfd inset;
-  border: 0.5px solid #9c0e89;
+  box-shadow: 0px 0px 20px 0px #858585 inset;
+  border: 0.5px solid #ffffff;
   outline-color: #0e749c;
   outline-style: initial;
-  outline-offset: -15px;
+  outline-offset: 10px;
   outline-width: 10px;
   color: #28aaf5;
-}
-
-a {
-  text-decoration: none;
 }
 
 .hide {
@@ -157,7 +171,7 @@ a {
 #initials {
   width: 80%;
   border-radius: 10px;
-  border: 1px solid black;
+  border: 2px solid #0e749c;
   padding-top: 15px;
   padding-left: 20px;
   padding-right: 20px;
@@ -165,8 +179,8 @@ a {
   font-size: 1.5rem;
   margin-top: 30px;
   margin-bottom: 5px;
-  color: whitesmoke;
-  background: radial-gradient(circle, rgb(53, 57, 75) 0%, rgba(58, 52, 3, 0.509) 0%, rgba(0,0,0,1) 100%);
+  color: rgb(139, 231, 243);
+  background-color: #1b2231a4;
 }
 
 #score-ul {
@@ -183,6 +197,10 @@ a {
   overflow: hidden;
   color: whitesmoke;
   resize: none;
-  background: radial-gradient(circle, rgb(53, 57, 75) 0%, rgba(58, 52, 3, 0.509) 0%, rgba(0,0,0,1) 100%);
+  background: radial-gradient(
+    circle,
+    rgb(53, 57, 75) 0%,
+    rgba(58, 52, 3, 0.509) 0%,
+    rgba(0, 0, 0, 1) 100%
+  );
 }
-

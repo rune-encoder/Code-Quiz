@@ -41,7 +41,7 @@ var masterQuestionIndex = 0;
 var correctQuestions = 0;
 
 // Message Displayed when answer chosen is Right or Wrong.
-var message = ["Wrong! ", "Correct! "];
+var message = ["Wrong! -10 Seconds!", "Correct! +4 Seconds!"];
 
 // Targets our elements displayed at the start of the quiz.
 var startEl = document.getElementById("start");
@@ -111,6 +111,7 @@ function createScoreList() {
     var scoreLi = document.createElement("li");
     scoreLi.textContent = createList;
     scoreLi.setAttribute("data-index", i);
+    scoreLi.setAttribute("style", "list-style: none");
     scoreUlEl.appendChild(scoreLi);
   }
 
@@ -160,7 +161,7 @@ function startTimer() {
     timerCount--;
     timerElement.textContent = timerCount;
     if (timerCount <= 0) {
-      timerElement.setAttribute("style", "color: #cc0000;");
+      timerElement.setAttribute("style", "color: #da7d7d;");
       timerElement.textContent = "Times Up!";
       masterQuestionIndex = questions.length;
       timerCount = 0;
@@ -171,8 +172,9 @@ function startTimer() {
   return;
 }
 
+// I do not take credit for the Fisher-Yates shuffle algorithm.
+// Source for Fisher-Yates shuffle algorithm: https://stackoverflow.com/questions/59810241/how-to-fisher-yates-shuffle-a-javascript-array
 // This function prevents the our choices from loading in the same order.
-// The Fisher-Yates shuffle algorithm.
 function shuffle(array) {
   var m = array.length,
     t,
@@ -232,6 +234,7 @@ function renderQuestion() {
     if (element.textContent === q.correct) {
       messagePEl.textContent = message[1];
       correctQuestions++;
+      timerCount = timerCount + 4;
 
       // If choice is incorrect: message displayed "Wrong!" and tally does not increase.
     } else {
